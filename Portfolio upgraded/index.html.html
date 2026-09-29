@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Adam Ehab — Computer Engineering Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0d10;
+            --card: #1e212b;
+            --line: #2a2e3a;
+            --acc: #ffb457;
+            --cream: #ffe8cc;
+            --mut: #a8b0c4;
+            --dim: #6b748a;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--mut);
+            font-family: Inter, system-ui, sans-serif;
+            line-height: 1.5
+        }
+
+        nav {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1100px, 94%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 24px;
+            background: rgba(16, 16, 18, .92);
+            border: 1px solid #2b2519;
+            border-radius: 40px;
+            z-index: 10;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+            backdrop-filter: blur(8px)
+        }
+
+        nav b {
+            color: var(--cream);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -.5px
+        }
+
+        nav div {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto
+        }
+
+        nav a {
+            color: var(--mut);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap
+        }
+
+        nav a.on {
+            background: var(--acc);
+            color: #111
+        }
+
+        section {
+            padding: 110px 5% 60px;
+            max-width: 1240px;
+            margin: auto;
+            border-bottom: 1px solid #15171d
+        }
+
+        h2 {
+            color: var(--acc);
+            text-align: center;
+            font-size: 40px;
+            font-weight: 800
+        }
+
+        h2+i {
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--acc);
+            border-radius: 3px;
+            margin: 14px auto
+        }
+
+        .sub {
+            text-align: center;
+            margin-bottom: 40px
+        }
+
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            min-height: 100vh;
+            flex-wrap: wrap
+        }
+
+        .badge {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            background: #231f18;
+            border: 1px solid #3a3020;
+            color: var(--acc);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 7px 16px;
+            border-radius: 20px
+        }
+
+        .badge:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e
+        }
+
+        h1 {
+            color: var(--cream);
+            font-size: 54px;
+            font-weight: 800;
+            margin: 18px 0 8px;
+            letter-spacing: -1px
+        }
+
+        h1 span {
+            color: var(--acc)
+        }
+
+        .role {
+            font-size: 22px;
+            font-weight: 600;
+            color: #c4cbe0;
+            margin-bottom: 22px
+        }
+
+        .hero p {
+            max-width: 500px;
+            font-size: 17px;
+            margin-bottom: 30px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 26px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            margin-right: 12px;
+            border: 1px solid var(--acc);
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .b1 {
+            background: var(--acc);
+            color: #111;
+            box-shadow: 0 6px 20px rgba(255, 180, 87, .3)
+        }
+
+        .b2 {
+            color: var(--cream)
+        }
+
+        .ph {
+            position: relative;
+            width: 320px;
+            max-width: 100%
+        }
+
+        .ph img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid #3a3020;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .6);
+            display: block
+        }
+
+        .tag {
+            position: absolute;
+            left: -20px;
+            bottom: -25px;
+            background: #1a1d26;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .5)
+        }
+
+        .tag b {
+            color: var(--cream);
+            font-size: 15px;
+            display: block
+        }
+
+        .tag small {
+            font-size: 12px
+        }
+
+        .filters {
+            display: flex;
+            width: max-content;
+            max-width: 100%;
+            margin: 0 auto 36px;
+            background: #15171e;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            padding: 6px;
+            overflow-x: auto
+        }
+
+        .filters button {
+            background: none;
+            border: 0;
+            color: var(--mut);
+            font: 600 14px Inter, sans-serif;
+            padding: 10px 20px;
+            border-radius: 22px;
+            cursor: pointer;
+            white-space: nowrap
+        }
+
+        .filters button.on {
+            background: var(--acc);
+            color: #111
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden
+        }
+
+        .pic {
+            height: 180px;
+            position: relative
+        }
+
+        .pic em {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(15, 15, 18, .85);
+            color: var(--acc);
+            font: 700 12px Inter;
+            padding: 6px 12px;
+            border-radius: 14px
+        }
+
+        .cb {
+            padding: 22px
+        }
+
+        .card h3 {
+            color: var(--cream);
+            font-size: 19px;
+            line-height: 1.35;
+            margin-bottom: 10px
+        }
+
+        .card p {
+            font-size: 14px;
+            margin-bottom: 14px
+        }
+
+        .tg span {
+            display: inline-block;
+            background: #2a2b31;
+            color: var(--acc);
+            font: 12px ui-monospace, Consolas, monospace;
+            padding: 4px 10px;
+            border-radius: 5px;
+            margin: 0 4px 6px 0
+        }
+
+        .p1 {
+            background: radial-gradient(circle at 30% 40%, #6b5a52 0 6px, transparent 7px), radial-gradient(circle at 70% 60%, #c9825a 0 8px, transparent 9px), repeating-linear-gradient(90deg, #1c1c20 0 14px, #26262c 14px 16px), #222
+        }
+
+        .p2 {
+            background: radial-gradient(circle at 35% 45%, #22384f 0 55px, transparent 57px), linear-gradient(120deg, #0a0a10 40%, #3a0d14 75%, #0c2a4a)
+        }
+
+        .p3 {
+            background: repeating-linear-gradient(90deg, transparent 0 9px, rgba(40, 220, 80, .55) 9px 11px), linear-gradient(#020a04, #04200b);
+        }
+
+        .p4 {
+            background: linear-gradient(200deg, #ff9a3c, #a34ff0 40%, #1aa6e8 70%, #2b18b8)
+        }
+
+        .p5 {
+            background: linear-gradient(135deg, #0f3a3a, #0a1a2a 60%, #ffb457)
+        }
+
+        .p6 {
+            background: repeating-linear-gradient(45deg, #111 0 20px, #1d1d22 20px 40px), #111
+        }
+
+        .p7 {
+            background: repeating-linear-gradient(0deg, #1a2030 0 18px, #2a3450 18px 20px), repeating-linear-gradient(90deg, transparent 0 18px, #2a3450 18px 20px), #1a2030
+        }
+
+        .p8 {
+            background: linear-gradient(135deg, #1b1f3a, #3b2a6a 60%, #5b8def)
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px
+        }
+
+        .stat {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 30px;
+            text-align: center
+        }
+
+        .stat b {
+            display: block;
+            color: #fff;
+            font-size: 44px;
+            font-weight: 800
+        }
+
+        .wide {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 28px 30px;
+            margin-bottom: 18px;
+            display: flex;
+            gap: 28px;
+            align-items: center
+        }
+
+        .ico {
+            flex: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            background: #2d2b2a;
+            color: var(--acc);
+            display: grid;
+            place-items: center;
+            font-size: 30px
+        }
+
+        .wide h4 {
+            color: var(--cream);
+            font-size: 20px
+        }
+
+        .wide h5 {
+            color: var(--acc);
+            font-size: 16px;
+            margin: 4px 0 8px
+        }
+
+        .wide p {
+            font-size: 14px
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 26px
+        }
+
+        .box {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 30px
+        }
+
+        .box h3 {
+            color: var(--acc);
+            font-size: 20px;
+            margin-bottom: 24px
+        }
+
+        .box h6 {
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--dim);
+            font-weight: 500;
+            margin: 14px 0 10px
+        }
+
+        .chips span {
+            display: inline-block;
+            background: #252833;
+            border: 1px solid var(--line);
+            color: var(--cream);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 9px 16px;
+            border-radius: 22px;
+            margin: 0 8px 10px 0
+        }
+
+        .chips .hl {
+            border-color: var(--acc);
+            color: var(--acc);
+            background: #2e2619
+        }
+
+        .cmp {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px
+        }
+
+        .cmp .it {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 22px
+        }
+
+        .it h3 {
+            color: var(--cream);
+            font-size: 17px;
+            margin-bottom: 6px
+        }
+
+        .it p {
+            font-size: 14px
+        }
+
+        .it small {
+            color: var(--acc);
+            font-weight: 600;
+            font-size: 12px
+        }
+
+        .res {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .res .it span {
+            display: inline-block;
+            background: #2a2b31;
+            color: var(--acc);
+            font: 12px ui-monospace, Consolas, monospace;
+            padding: 4px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px
+        }
+
+        .ct {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 1160px;
+            margin: auto
+        }
+
+        @media(max-width:800px) {
+            .ct {
+                grid-template-columns: 1fr
+            }
+
+            h1 {
+                font-size: 38px
+            }
+
+            nav a {
+                padding: 8px 10px;
+                font-size: 13px
+            }
+
+            nav b {
+                display: none
+            }
+        }
+
+        .ct h3 {
+            color: var(--cream);
+            font-size: 24px;
+            margin-bottom: 12px
+        }
+
+        .row {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin: 22px 0
+        }
+
+        .row .ico {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 16px
+        }
+
+        .row small {
+            display: block;
+            color: var(--dim);
+            font-weight: 600;
+            font-size: 13px
+        }
+
+        .row span {
+            color: var(--cream)
+        }
+
+        .soc {
+            display: flex;
+            gap: 14px
+        }
+
+        .soc a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #14161c;
+            border: 1px solid var(--line);
+            color: var(--cream);
+            display: grid;
+            place-items: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px
+        }
+
+        label {
+            display: block;
+            color: #c4cbe0;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0 0 8px
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: #12141a;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            color: var(--cream);
+            font: 15px Inter, sans-serif;
+            margin-bottom: 20px
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical
+        }
+
+        form .btn {
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            border: 0
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: var(--dim)
+        }
+    </style>
+</head>
+
+<body>
+    <nav><b>Adam Ehab</b>
+        <div id="links"></div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero"><span class="badge">Available for projects &amp; research</span>
+            <h1>Welcome, I'm <span>Adam Ehab</span></h1>
+            <div class="role">&lt;/&gt; Computer Engineering Student</div>
+            <p>Passionate Computer Engineering student specializing in embedded systems, low-level firmware development,
+                microcontroller prototyping, and algorithmic problem solving. Building hardware-software integrated
+                solutions.</p>
+            <a class="btn b1" href="#contact">➤ Contact Me</a><a class="btn b2" href="Adam_Ehab_CV_Updated_v4.docx">⭳
+                Download CV</a>
+        </div>
+        <div class="ph"><img src="My Image.jpg" alt="Adam Ehab">
+            <div class="tag"><b>Embedded &amp; Software</b><small>Cairo University</small></div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2><i></i>
+        <p class="sub">Selected hardware, firmware, and software engineering builds</p>
+        <div class="filters"><button class="on" data-f="all">All</button><button data-f="emb">Embedded
+                Systems</button><button data-f="sw">Software &amp; Algo</button><button data-f="web">Web Tools</button>
+        </div>
+        <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2><i></i>
+        <p class="sub">Academic record &amp; engineering foundation</p>
+        <div class="stats">
+            <div class="stat"><b>3.21</b>Cumulative GPA</div>
+            <div class="stat"><b>3rd</b>Academic Year</div>
+            <div class="stat"><b>15+</b>Engineering Projects</div>
+        </div>
+        <div class="wide">
+            <div class="ico">🏛</div>
+            <div>
+                <h4>Cairo University</h4>
+                <h5>Faculty of Engineering — Computer Engineering Department</h5>
+                <p>September 2024 – June 2029. Rigorous computer engineering coursework covering microprocessor
+                    architecture, embedded system design, data structures &amp; algorithms, computer vision, discrete
+                    mathematics, and operating systems.</p>
+            </div>
+        </div>
+        <div class="wide">
+            <div class="ico">🎓</div>
+            <div>
+                <h4>Training &amp; Internships</h4>
+                <h5>Hands-on industry exposure</h5>
+                <p><b style="color:var(--cream)">DEPI — Software Testing Track (5th Wave)</b>, July 2026 – Present:
+                    software testing methodologies and QA practices.<br><b style="color:var(--cream)">NTI — Linux
+                        Fundamentals (120 Hours)</b>, August 2026: Linux systems administration.<br><b
+                        style="color:var(--cream)">PetroGas IT Section Trainee</b>, July 2025: enterprise IT
+                    infrastructure and systems administration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills &amp; Tools</h2><i></i>
+        <p class="sub">Technical toolbox &amp; interpersonal capabilities</p>
+        <div class="two">
+            <div class="box">
+                <h3>▣ Tech &amp; Hardware Skills</h3>
+                <h6>PROGRAMMING LANGUAGES</h6>
+                <div class="chips"><span>C++</span><span>Python</span><span>Embedded C</span><span>ARM
+                        Assembly</span><span>Arduino C</span><span>HTML5 &amp;
+                        CSS3</span><span>JavaScript</span><span>VHDL / Verilog HDL</span></div>
+                <h6>MICROPROCESSORS &amp; HARDWARE</h6>
+                <div class="chips"><span>STM32
+                        (F4)</span><span>ESP32</span><span>Arduino</span><span>GPIO/RCC/Timers</span><span>PWM</span><span>I2C</span><span>UART</span>
+                </div>
+                <h6>IDES &amp; ENVIRONMENTS</h6>
+                <div class="chips"><span>VS Code</span><span>Keil
+                        MDK</span><span>STM32CubeProgrammer</span><span>Arduino
+                        IDE</span><span>TinkerCAD</span><span>Git/GitHub</span><span>Linux (Ubuntu/Kali)</span></div>
+            </div>
+            <div class="box">
+                <h3>👥 Leadership &amp; Soft Skills</h3>
+                <h6>CORE COMPETENCIES</h6>
+                <div class="chips"><span class="hl">Team Leadership</span><span>Technical Presenter</span><span>Active
+                        Listener</span><span>Problem Solving</span></div>
+                <h6>LANGUAGES</h6>
+                <div class="chips"><span>Arabic (Native)</span><span>English (Proficient)</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions">
+        <h2>Competitions</h2><i></i>
+        <p class="sub">Hackathons, programming contests, and technical challenges</p>
+        <div class="cmp">
+            <div class="it"><small>MAY 2026</small>
+                <h3>🏆 2nd Place — 15th Research Day</h3>
+                <p>Cairo University &amp; TCCD. Awarded for the Assistive Eye Tracking Communication Systems project,
+                    with The Big O's team.</p>
+            </div>
+            <div class="it"><small>AUGUST 2026</small>
+                <h3>🏆 ECPC — Egyptian Collegiate Programming Contest</h3>
+                <p>Competing in algorithmic problem-solving contests on data structures, graph theory, and
+                    time-complexity optimization.</p>
+            </div>
+            <div class="it"><small>AUGUST 2026</small>
+                <h3>▭ IEEE Robotics Hackathon</h3>
+                <p>Competing in a robotics hackathon focused on rapid hardware-software prototyping.</p>
+            </div>
+            <div class="it"><small>JUNE 2026</small>
+                <h3>▭ INTELLIE SHIFT Hackathon</h3>
+                <p>Built an ESP32-based IoT platform with an AI classifier to reduce petrol usage and score driving
+                    behavior.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="researches">
+        <h2>Researches</h2><i></i>
+        <p class="sub">Academic research papers &amp; technical explorations</p>
+        <div class="res">
+            <div class="it"><span>Applied Research</span>
+                <h3>TinyML on ESP32 Microcontrollers</h3>
+                <p>Investigating lightweight machine learning inference models deployed directly on low-power ESP32 edge
+                    microcontrollers for real-time sensor analysis.</p>
+            </div>
+            <div class="it"><span>Computer Vision</span>
+                <h3>Eye Gaze Tracking via Linear Algebra &amp; SVD</h3>
+                <p>Exploration of Singular Value Decomposition (SVD) and low-rank approximations to optimize
+                    gaze-coordinate calibration algorithms for gaze typing applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2><i></i>
+        <p class="sub">Let's connect for collaborations, opportunities, or inquiries</p>
+        <div class="ct">
+            <div>
+                <h3>Reach Out Directly</h3>
+                <p>Feel free to connect on social networks or message me via WhatsApp for quick communication.</p>
+                <div class="row">
+                    <div class="ico">✉</div>
+                    <div><small>Email</small><span>AdamEhab32@iCloud.com</span></div>
+                </div>
+                <div class="row">
+                    <div class="ico">✆</div>
+                    <div><small>Phone</small><span>+20 155 588 5900</span></div>
+                </div>
+                <div class="soc"><a href="https://linkedin.com/in/adam-ehab-" target="_blank">in</a><a
+                        href="https://github.com/adam-ehab32" target="_blank">Git</a><a
+                        href="https://wa.me/201555885900" target="_blank">WA</a></div>
+            </div>
+            <form id="f"><label>Your Name</label><input id="n" placeholder="e.g. John Doe"><label>Your
+                    Email</label><input id="e" placeholder="e.g. john@example.com"><label>Your Message</label><textarea
+                    id="m" placeholder="Write your message here..."></textarea><button class="btn b1" type="submit">➤
+                    Send Message</button></form>
+        </div>
+    </section>
+    <footer>© 2026 Adam Ehab · Cairo, Egypt</footer>
+
+    <script>
+        const P = [
+            ["emb", "p1", "Embedded Systems", "ESP32 Smart Garage Controller", "Automated garage access control featuring ESP32 microcontroller, IR barrier sensors, LCD display metrics, and high-torque servo gate control.", ["ESP32", "C++", "IR Sensors", "Servo"]],
+            ["sw", "p2", "Computer Vision", "Eye-Tracking Communication System", "Assistive gaze-based AAC keyboard using computer vision, pupil estimation, and SVD smoothing. 93% accuracy validated at Kasr Al Ainy Hospital.", ["Python", "OpenCV", "Linear Algebra"]],
+            ["web", "p3", "Web &amp; Firmware", "AESARS STM32 Register Configurator", "Interactive browser utility for configuring STM32F401 peripheral register maps and auto-generating RM0368-compliant hex values and ARMCLANG assembly.", ["JavaScript", "HTML5/CSS3", "STM32"]],
+            ["emb", "p4", "Digital Logic", "Arithmetic Logic Unit (ALU)", "Complete VHDL/Verilog HDL logic design and simulation for fundamental computer arithmetic and bitwise logic operations.", ["Verilog HDL", "VHDL", "Digital Logic"]],
+            ["emb", "p5", "IoT · AI", "Smart Driving &amp; Fuel Efficiency Monitor", "ESP32-based IoT platform monitoring driving quality in real time, with an AI classifier flagging inefficient driving. INTELLIE SHIFT Hackathon.", ["ESP32", "IoT", "AI"]],
+            ["emb", "p6", "Robotics", "Line Follower Car", "Autonomous robot using IR sensors and PID-style control logic for track following.", ["Arduino", "IR Sensors", "PID"]],
+            ["emb", "p7", "Robotics", "Maze Solver Car", "Wall-following autonomous vehicle using ultrasonic sensors and decision-tree navigation.", ["Arduino", "Ultrasonic"]],
+            ["sw", "p8", "Software &amp; Algo", "Flowchart Visualizer", "C++ program that parses and displays algorithm flowcharts, improving code visualization for peers.", ["C++", "Parsing"]]];
+        const g = document.getElementById('grid');
+        g.innerHTML = P.map(p => `<div class="card" data-c="${p[0]}"><div class="pic ${p[1]}"><em>${p[2]}</em></div><div class="cb"><h3>${p[3]}</h3><p>${p[4]}</p><div class="tg">${p[5].map(t => `<span>${t}</span>`).join('')}</div></div></div>`).join('');
+        document.querySelectorAll('.filters button').forEach(b => b.onclick = () => { document.querySelectorAll('.filters button').forEach(x => x.classList.remove('on')); b.classList.add('on'); g.querySelectorAll('.card').forEach(c => c.style.display = (b.dataset.f == 'all' || c.dataset.c == b.dataset.f) ? '' : 'none') });
+        const S = ['home', 'projects', 'education', 'skills', 'competitions', 'researches', 'contact'];
+        const L = document.getElementById('links');
+        L.innerHTML = S.map(s => `<a href="#${s}" data-s="${s}">${s[0].toUpperCase() + s.slice(1)}</a>`).join('');
+        function spy() { let cur = 'home'; S.forEach(s => { if (document.getElementById(s).getBoundingClientRect().top < 200) cur = s }); L.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.s == cur)) }
+        addEventListener('scroll', spy); spy();
+        document.getElementById('f').onsubmit = e => { e.preventDefault(); const n = document.getElementById('n').value, em = document.getElementById('e').value, m = document.getElementById('m').value; location.href = 'mailto:AdamEhab32@iCloud.com?subject=' + encodeURIComponent('Portfolio message from ' + n) + '&body=' + encodeURIComponent(m + '\n\n' + em) };
+    </script>
+</body>
+
+</html>
